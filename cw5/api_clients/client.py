@@ -1,5 +1,5 @@
 from .base import APIclient
-from ..entities import ShortEmployerInfo
+from ..entities import ShortEmployerInfo, FullEmployerInfo, VacancyInfo, VacancyType
 
 
 # класс для апи клиентов (компаний, работодателей)
@@ -25,6 +25,38 @@ class HHApiClient(APIclient):
             for emp in employers
         ]
 
+# функция получающая работодателей
+    def _get_employer_info(self, employer_id: int) -> FullEmployerInfo:
+        employers_info = self._get(f'/employers/{employer_id}')
+        return FullEmployerInfo(
+            id=employer_id,
+            name=employers_info['name'],
+            url=employers_info['alternate_url'],
+            open_vacancies=employers_info['open_vacancies'],
+            website=employers_info['site_url'],
+            location=employers_info['area']['name']
+        )
+
+# функция получающая вакансии
+    def _get_employer_vacancies(self, employer_id: int) -> list[VacancyInfo]:
+        params = {
+            'employer_id': employer_id,
+            'only_with_salary': True,
+        }
+        vacancies = self._get_items('/vacancies', params=params)
+        return [
+            VacancyInfo(
+                id=int(vac['id']),
+                name=vac['name'],
+                link=vac['alternate_url'],
+                salary_from=vac['salary'].get('from'),
+                salary_to=vac['salary'].get('to'),
+                employer_id=employer_id,
+                type=VacancyType[vac['type']['id']]
+            )
+            for vac in vacancies
+        ]
+
     @property
     def base_url(self) -> str:
         return self.__base_url
@@ -47,5 +79,3 @@ class HHApiClient(APIclient):
                 break
 
         return items
-
-

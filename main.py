@@ -3,14 +3,10 @@ from prettytable import PrettyTable
 
 
 def main():
-    hh_client = HHApiClient()
-    employers = hh_client.search_employers(search='VK')
+    hh_client: HHApiClient = HHApiClient()
+    data = hh_client._get_employer_info(1740)
 
-    table = PrettyTable(field_names=['ID', 'company name', 'link', 'number of vacancies'])
-    for emp in employers:
-        table.add_row([emp.id, emp.name, emp.url, emp.open_vacancies])
-
-    print(table)
+    print(data)
 
 
 if __name__ == '__main__':

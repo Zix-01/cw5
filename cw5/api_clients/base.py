@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 import requests
 
+
 # абстрактный класс для клиентов
 class APIclient(ABC):
     @property
