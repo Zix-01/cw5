@@ -1,0 +1,26 @@
+# Python virtual environment
+.venv/
+venv/
+
+# Compiled Python files
+*.pyc
+__pycache__/
+
+# API credentials and secrets
+.api_keys/
+.secrets/
+
+# Logs and temporary files
+logs/
+tmp/
+
+# IDE-specific files
+.idea/
+.vscode/
+
+# Coverage reports
+coverage/
+htmlcov/
+
+# Test artifacts
+.pytest_cache/
