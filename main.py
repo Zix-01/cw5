@@ -1,12 +1,8 @@
-from cw5.api_clients import HHApiClient, client
-from prettytable import PrettyTable
+from cw5.user_interection import run_interaction
 
 
 def main():
-    hh_client: HHApiClient = HHApiClient()
-    data = hh_client._get_employer_info(1740)
-
-    print(data)
+    run_interaction()
 
 
 if __name__ == '__main__':

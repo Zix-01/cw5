@@ -14,12 +14,13 @@ class ShortEmployerInfo:
 # полная информация о работодателе
 @dataclass
 class FullEmployerInfo:
+
     id: int
     name: str
     url: str
     open_vacancies: int
     website: str
-    location: str
+    region: str
 
 
 class VacancyType(Enum):
@@ -31,6 +32,7 @@ class VacancyType(Enum):
 
 @dataclass
 class VacancyInfo:
+
     id: int
     employer_id: int
     name: str

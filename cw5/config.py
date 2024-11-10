@@ -1,8 +1,13 @@
 import json
 import os
 from pathlib import Path
+from dotenv import load_dotenv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+MIGRATIONS_DIR = BASE_DIR.joinpath('cw5', 'migrations')
+
+load_dotenv()
 
 
 class Settings:
